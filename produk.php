@@ -30,5 +30,15 @@ class Produk {
     }
 }
 
-$produk3 = new Produk("naruto", "Masashi Kishimoto", "Shonen Jump", 3000) ;
-echo $produk3->getLabel();
+    // membuat object type
+    class CetakInfoProduk{
+        public function cetak( Produk $produk ){
+            $str = "{$produk->judul} | {$produk->getLabel()} (Rp. {$produk->harga})";
+            return $str;
+        }
+}
+
+$produk3 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000) ;
+
+$infoProduk1 = new CetakInfoProduk();
+echo $infoProduk1->cetak($produk3);
