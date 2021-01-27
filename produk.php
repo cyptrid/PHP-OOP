@@ -7,8 +7,13 @@ class Produk {
     // membuat property
     public  $judul = "judul", 
             $penulis = "penulis",
-            $penerbit = "penerbit",
-            $harga = 0;
+            $penerbit = "penerbit";
+
+            // membuat visibility 
+            // protected bisa di lihat di child, 
+            // private hanya bisa di akses di class produk
+            protected  $diskon = 0;  
+            private $harga = 0;
 
 
     // membuat constructor
@@ -17,6 +22,10 @@ class Produk {
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
+    }
+
+    public function getHarga(){
+        return $this->harga - ( $this->harga * $this->diskon / 100 ) ;
     }
 
     // membuat method
@@ -62,6 +71,10 @@ class Produk {
             $this->waktuMain = $waktuMain;
          }
 
+         public function setDiskon( $diskon ){
+            $this->diskon = $diskon;
+        }
+
         public function getInfoProduk(){
             $str = "Game : ". parent::getInfoProduk() ." - {$this->waktuMain} Jam";
             return $str;
@@ -77,9 +90,12 @@ class Produk {
 }
 
 $produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100);
-$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 25000, 50);
+$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 25000, 500);
 
 echo $produk1->getInfoProduk();
 echo "<br>";
 echo $produk2->getInfoProduk();
+echo "<br>";
+$produk2->setDiskon(50);
+echo $produk2->getHarga();
 
