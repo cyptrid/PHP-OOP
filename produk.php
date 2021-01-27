@@ -5,7 +5,7 @@
 
 class Produk {
     // membuat property
-    public  $judul = "judul", 
+    private  $judul = "judul", 
             $penulis = "penulis",
             $penerbit = "penerbit";
 
@@ -22,6 +22,18 @@ class Produk {
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
+    }
+    // setter
+    public function setJudul ( $judul ){
+        if ( !is_string($judul) ){
+            throw new Exception("judul harus string");
+        }
+        $this->judul = $judul;
+    }
+
+    // getter 
+    public function getJudul(){
+        return $this->judul;
     }
 
     public function getHarga(){
@@ -99,3 +111,8 @@ echo "<br>";
 $produk2->setDiskon(50);
 echo $produk2->getHarga();
 
+echo "<br>";
+// setter
+echo $produk1->setJudul("judulBaru");
+// getter
+echo $produk1->getJudul();
