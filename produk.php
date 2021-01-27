@@ -10,6 +10,15 @@ class Produk {
             $penerbit = "penerbit",
             $harga = 0;
 
+    // membuat constructor
+    public function __construct( $judul, $penulis, $penerbit, $harga ){
+        $this->judul = $judul;
+        $this->penulis = $penulis;
+        $this->penerbit = $penerbit;
+        $this->harga = $harga;
+
+    }
+
     // membuat method
         public function sayHello(){
             return "Hello World";
@@ -21,21 +30,5 @@ class Produk {
     }
 }
 
-// $produk1 = new Produk();
-// $produk1 -> judul = "naruto";
-// var_dump($produk1);
-
-
-$produk3 = new Produk();
-$produk3->judul = "naruto";
-$produk3->penulis = "Masashi Kishimoto";
-$produk3->penerbit = "Shonen Jump";
-$produk3->harga = 3000;
-
-echo "Komik : $produk3->penulis, $produk3->penerbit";
-
-echo "<br>";
-// memanggil method
-echo $produk3->sayHello();
-echo "<br>";
+$produk3 = new Produk("naruto", "Masashi Kishimoto", "Shonen Jump", 3000) ;
 echo $produk3->getLabel();
