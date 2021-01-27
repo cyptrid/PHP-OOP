@@ -8,19 +8,15 @@ class Produk {
     public  $judul = "judul", 
             $penulis = "penulis",
             $penerbit = "penerbit",
-            $harga = 0,
-            $jmlHalaman = 0,
-            $waktuMain = 0;
+            $harga = 0;
 
 
     // membuat constructor
-    public function __construct( $judul, $penulis, $penerbit, $harga, $jmlHalaman, $waktuMain ){
+    public function __construct( $judul, $penulis, $penerbit, $harga ){
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
-        $this->jmlHalaman = $jmlHalaman;
-        $this->waktuMain = $waktuMain;
     }
 
     // membuat method
@@ -33,19 +29,41 @@ class Produk {
         return "$this->penulis, $this->penerbit";
     }
 
+    public function getInfoProduk(){
+        $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
+        return $str;
+    }
+
     
 }
     // membuat inheritance 
     class Komik extends Produk {
+        public $jmlhHalaman;
+        // overiding (mengambil alih property punya class produk)
+        public function __construct( $judul, $penulis, $penerbit, $harga, $jmlHalaman){
+            parent::__construct($judul, $penulis, $penerbit, $harga, $jmlHalaman);
+
+            $this->jmlHalaman = $jmlHalaman;
+        }
+
         public function getInfoProduk(){
-            $str = "Komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jmlHalaman} Halaman";
+            // membuat overiding (mengambil function getInfoProduk di class produk) 
+            $str = "Komik : ". parent::getInfoProduk() ." - {$this->jmlHalaman} Halaman";
             return $str;
         }
     }
 
     class Game extends Produk {
+        public $waktuMain;
+         // overiding (mengambil alih property punya class produk)
+         public function __construct($judul, $penulis, $penerbit, $harga, $waktuMain){
+            parent::__construct($judul, $penulis, $penerbit, $harga, $waktuMain);
+
+            $this->waktuMain = $waktuMain;
+         }
+
         public function getInfoProduk(){
-            $str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->waktuMain} Jam";
+            $str = "Game : ". parent::getInfoProduk() ." - {$this->waktuMain} Jam";
             return $str;
         }
     }
@@ -58,8 +76,8 @@ class Produk {
         }
 }
 
-$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100, 0);
-$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 25000, 0, 50);
+$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000, 100);
+$produk2 = new Game("Uncharted", "Neil Druckmann", "Sony Computer", 25000, 50);
 
 echo $produk1->getInfoProduk();
 echo "<br>";
