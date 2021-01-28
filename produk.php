@@ -3,8 +3,13 @@
 // Jualan Produk
 // Komik, Game
 
+// Interface
+interface InfoProduk{
+    public function getInfoProduk();
+}
+
 // abstract Class
-abstract class Produk {
+class Produk {
     // membuat property
     private  $judul = "judul", 
             $penulis = "penulis",
@@ -51,8 +56,6 @@ abstract class Produk {
         return "$this->penulis, $this->penerbit";
     }
 
-    abstract public function getInfoProduk();
-    
     public function getInfo(){
         $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
         return $str;
@@ -61,7 +64,7 @@ abstract class Produk {
     
 }
     // membuat inheritance 
-    class Komik extends Produk {
+    class Komik extends Produk implements InfoProduk {
         public $jmlhHalaman;
         // overiding (mengambil alih property punya class produk)
         public function __construct( $judul, $penulis, $penerbit, $harga, $jmlHalaman){
@@ -77,7 +80,7 @@ abstract class Produk {
         }
     }
 
-    class Game extends Produk {
+    class Game extends Produk implements InfoProduk{
         public $waktuMain;
          // overiding (mengambil alih property punya class produk)
          public function __construct($judul, $penulis, $penerbit, $harga, $waktuMain){
